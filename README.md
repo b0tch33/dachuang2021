@@ -1,7 +1,16 @@
 # dachuang2021
  
-jhfghjbkbhhjknj
-sdfs
+〇（已完成）、
+Total Commander 处理数据集（删除重复图片以及重新规划图片存储结构）
+python图片提取（读取速度从8分钟降到55s）
+一、
+1 提取人脸以及特征 http://cookdata.cn/note/view_static_note/91fef440f61ec0fa68c121b958fd6385/ 图片的降维和提取特征的操作以及图像重构
+2 图片转矩阵 https://blog.csdn.net/weixin_33798152/article/details/88001577
+------------------------
+二、
+3 矩阵处理（聚类、寻找标签）
+可以使用某种已有技术（python库、代码等）得到一些可用标签
+聚类：正侧脸、男女、表情、年龄（难度预计递增）
+4 ······
 
-zzj = black devil
-zh = zzj
+需要寻找资料，以支持图片聚类方法，无论难易首先需要对于整个过程有一个基本思路，例如哪块大概用什么方法解决
