@@ -15,6 +15,8 @@ import numpy as np
 import threading
 import time
 
+time_start=time.time()
+
 path = "E:/study/dachuang/data_test"
 images = []
 
@@ -38,7 +40,6 @@ for t in range(0, 105):
     x += 1
     
 # print(threads)
-
 
 # 未使用的pkl文件方案，先预留不做删除
 # with open('images0.pkl','ab') as fp:
@@ -68,4 +69,8 @@ if __name__=="__main__":
     
     for i in range(100):
         print(images[i])
+        
+time_end=time.time()
+print('totally cost',time_end-time_start)
+
     
