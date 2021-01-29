@@ -33,11 +33,12 @@ dim = (width, height)
 # 进行缩放
 face_im_255 = cv2.resize(face_im, dim, interpolation=cv2.INTER_AREA)
 
-pca = PCA(n_components=1)
-t = face_im_255.reshape(-1,1)
-pca.fit(face_im_255.reshape(-1,1))
-face_im_255_new = pca.transform(t)
-print(face_im_255_new)
+# # PCA降维（未完成）
+# pca = PCA(n_components=1)
+# t = face_im_255.reshape(-1,1)
+# pca.fit(face_im_255.reshape(-1,1))
+# face_im_255_new = pca.transform(t)
+# print(face_im_255_new)
 
 # 将图片（这里等于矩阵）存放进data列表，准备进行下一步
 data = []
