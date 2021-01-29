@@ -27,26 +27,30 @@ for (x,y,w,h) in faces:
     # print(x,y,w,h)
     face_im = im[y:y+h, x:x+w]
 
-# 将裁剪人脸缩放为255*255像素大小
-width, height = [64, 64]
+# 将裁剪人脸缩放为64*64像素大小
+width, height = [128, 128]
 dim = (width, height)
 # 进行缩放
 face_im_255 = cv2.resize(face_im, dim, interpolation=cv2.INTER_AREA)
 
-# # PCA降维（未完成）
-# pca = PCA(n_components=1)
-# t = face_im_255.reshape(-1,1)
-# pca.fit(face_im_255.reshape(-1,1))
-# face_im_255_new = pca.transform(t)
-# print(face_im_255_new)
+# PCA降维（未完成）
+pca = PCA(n_components=32)
+face_im_255_new = pca.fit_transform(face_im_255)
+print(face_im_255_new)
+new_image = np.around(face_im_255_new)
+new_image = new_image.astype(np.uint8)
+new_image = new_image.reshape(64,64)
+new_image = cv2.resize(new_image, dim, interpolation=cv2.INTER_AREA)
+print(new_image)
 
-# 将图片（这里等于矩阵）存放进data列表，准备进行下一步
-data = []
-data.append(face_im_255)
-print(data[0])
+# # 将图片（这里等于矩阵）存放进data列表，准备进行下一步
+# data = []
+# data.append(face_im_255)
+# print(data[0])
 
 # # 显示图片
 # cv2.imshow('image', im)
-# cv2.imshow('face', face_im_255)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.imshow('face', face_im_255)
+cv2.imshow('face_0', new_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
