@@ -4,7 +4,7 @@ Created on Tue Jan 26 15:00:27 2021
 
 @author: 66441
 
-仅为一张图片的人脸裁剪，之后与读取图片进行衔接
+仅为一张图片的人脸裁剪及提取特征值，之后与读取图片进行衔接
 """
 
 import cv2
@@ -62,7 +62,7 @@ temp_im = np.zeros((400,400), dtype=np.uint8)
 temp_im += 255
 # print(temp_im.shape)
 for i in range(100):
-    temp_im = temp_im ^ tezhenglian(i)
+    temp_im = temp_im + tezhenglian(i)
     print(i)
     cv2.imshow('face_new', temp_im)
     cv2.waitKey(0)
@@ -79,7 +79,7 @@ data = []
 # cv2.imshow('image', im)
 # cv2.imshow('face', face_im_255)
 # cv2.imshow('face_0', new_image)
-zuhe_im = face_im_255 ^ temp_im
+zuhe_im = face_im_255 + temp_im
 cv2.imshow('face_new', zuhe_im)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
