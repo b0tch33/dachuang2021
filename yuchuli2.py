@@ -51,7 +51,7 @@ def read_img(path, i):
         face_im = copy.deepcopy(im_gray)
         # 人脸检测
         faces = face_model.detectMultiScale(im_gray)
-        if faces is None:
+        if faces == ():
             continue
         # 裁剪人脸
         for (x,y,w,h) in faces:
@@ -71,7 +71,7 @@ def read_img(path, i):
         
         # 将图片（这里等于矩阵）存放进data列表，准备进行下一步
         datas.append(huanyuan)
-        # print("图片数量：", v)
+        print("图片数量：", len(datas))
         # v += 1
         # im.close()
         im.close()
