@@ -7,6 +7,7 @@ Created on Tue Jan 26 15:00:27 2021
 仅为一张图片的人脸裁剪及提取特征值，之后与读取图片进行衔接
 """
 
+from PIL import Image
 import cv2
 import numpy as np
 from sklearn.decomposition import PCA
@@ -17,9 +18,11 @@ dim = (width, height)
 
 # 这里用读取所有图片的代码取代之
 path = "E:/study/dachuang/data_test/10/43088_1925-05-12_1956.jpg"
-im = cv2.imread(path)
+im = Image.open(path)
 
-print(im.shape)
+# print(im.shape)
+
+im = np.array(im)
 
 face_model = cv2.CascadeClassifier(r'D:/anaconda3/Lib/site-packages/cv2/data/haarcascade_frontalface_alt.xml')
 # 图片进行灰度处理
