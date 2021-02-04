@@ -22,13 +22,16 @@ im = Image.open(path)
 
 # print(im.shape)
 
-im = np.array(im)
+# im = np.array(im)
+# im = cv2.cvtColor(np.asarray(im), cv2.COLOR_RGB2GRAY)
+print(type(im))
 
 face_model = cv2.CascadeClassifier(r'D:/anaconda3/Lib/site-packages/cv2/data/haarcascade_frontalface_alt.xml')
 # 图片进行灰度处理
-im = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
+im = cv2.cvtColor(np.asarray(im), cv2.COLOR_RGB2GRAY)
 # 人脸检测
 faces = face_model.detectMultiScale(im)
+print(faces)
 # 裁剪人脸
 for (x,y,w,h) in faces:
     face_im = im[y:y+h, x:x+w]
