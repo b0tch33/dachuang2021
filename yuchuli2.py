@@ -16,30 +16,36 @@ from PIL import Image
 import cv2
 import os
 import warnings
-warnings.filterwarnings("error", category=UserWarning)
+warnings.filterwarnings("ignore")
 
 import _pickle as cPickle
 import numpy as np
 import threading
 import time
 import copy
+import uuid
 from sklearn.decomposition import PCA
 
 time_start=time.time()
 
 path = "E:/study/dachuang/data_test"
+path_jiangwei = "E:/study/dachuang/data_jiangwei"
 images = []
 datas = []
 
-width, height = [400, 400]
+width, height = [128, 128]
 dim = (width, height)
+
+
+# v = 1
 
 # 读取图片线程
 def read_img(path, i):
+    global v
+    v = 1
     path1 = path + "/" + str(i)
     for image in os.listdir(path1):
         im = Image.open(path1 + '/' + image)
-        # v = 1
         # print(v)
         # if v < 5:
         #     print(im)
@@ -61,7 +67,7 @@ def read_img(path, i):
         face_im = cv2.resize(face_im, dim, interpolation=cv2.INTER_AREA)
         
         # PCA降维（未完成）
-        pca = PCA(n_components=20)
+        pca = PCA(n_components=8)
         face_im_new = pca.fit_transform(face_im)
         huanyuan = pca.inverse_transform(face_im_new)
         huanyuan = huanyuan.astype(np.uint8)
@@ -70,16 +76,24 @@ def read_img(path, i):
         # print(new_image)
         
         # 将图片（这里等于矩阵）存放进data列表，准备进行下一步
-        datas.append(huanyuan)
-        print("图片数量：", len(datas))
-        # v += 1
+        # datas.append(huanyuan) # 处理好的图片都在这个列表内，huanyuan为降维后的图片，将此用于之后的数据挖掘
+        
+        """
+        改造：将每一张降维后的图片（矩阵）存为jpg文件，5000个一组依次存进以1为起始的文件夹内
+        
+        """
+        uuid_str = uuid.uuid4().hex
+        name = path_jiangwei + '/' + uuid_str + ".jpg"
+        cv2.imwrite(name, huanyuan)
+        print("图片数量：", v)
+        v += 1
         # im.close()
         im.close()
         
 # 创建线程
 threads = []
 x = 1
-for t in range(0, 105):
+for t in range(0, 5):
     t = threading.Thread(target=read_img, args=(path, x))
     threads.append(t)
     x += 1
@@ -105,15 +119,18 @@ for t in range(0, 105):
 
 # 主函数，调用线程
 if __name__=="__main__":
+    v = 1
     for thr in threads:
         thr.start()
-    for i in range(10):
+    for i in range(3):
         threads[i].join()
     
-    print("图片数量：", len(datas))
-    
-    # for i in range(100):
-    #     print(images[i])
+    # print("图片数量：", len(datas))
+
+    # print(datas[0])
+    # cv2.imshow('face_new', datas[3])
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
         
     time_end=time.time()
 print('totally cost',time_end-time_start)
