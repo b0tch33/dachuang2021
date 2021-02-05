@@ -108,7 +108,7 @@ if __name__=="__main__":
     v = 1
     for thr in threads:
         thr.start()
-    for i in range(3):
+    for i in range(5):
         threads[i].join()
         
     time_end=time.time()
