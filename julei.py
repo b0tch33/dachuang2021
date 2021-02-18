@@ -28,14 +28,14 @@ for image in os.listdir(path):
         test.append(im)
 
 # print(train)
-kmeans=KMeans(n_clusters=2)
+kmeans = KMeans(n_clusters=2)
 kmeans.fit(train) 
-print(kmeans.labels_ )
+print(kmeans.labels_)
 # print(images[0])
 for idx in range(len(kmeans.labels_)):
     oldname = path + '/' + images[idx]
     newname = 'E:/study/dachuang/' + str(kmeans.labels_[idx]) + '/' + images[idx]
-    shutil.copyfile(oldname,newname)
+    shutil.copyfile(oldname, newname)
     
 # res = kmeans.predict(test) 
 # print(res)
