@@ -9,6 +9,7 @@ import cv2
 import os
 import random
 import numpy as np
+import tensorflow as tf
 from PIL import Image
 from sklearn import neighbors 
 from sklearn.cluster import KMeans
@@ -65,6 +66,8 @@ for image in os.listdir(path_1000):
         im = im.flatten()
         test.append(im)
         t += 1
+    else:
+        break
     
 LP = LabelPropagation()
 LP.fit([i[0] for i in train], [i[1] for i in train])
