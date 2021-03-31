@@ -44,7 +44,7 @@ output = Dense(1000, activation='softmax')(merged)
 # 最终模型：
 vqa_model = Model(inputs=[image_input, question_input], outputs=output)
 
-print(vqa_model.summary())
+# print(vqa_model.summary())
 
 from tensorflow.keras.layers import TimeDistributed
 
@@ -65,4 +65,7 @@ merged = keras.layers.concatenate([encoded_video, encoded_video_question])
 output = Dense(1000, activation='softmax')(merged)
 video_qa_model = Model(inputs=[video_input, video_question_input], outputs=output)
 
-print(video_qa_model.summary())
+# print(video_qa_model.to_yaml())
+
+from tensorflow.keras.utils import plot_model
+plot_model(video_qa_model, to_file='model.png')

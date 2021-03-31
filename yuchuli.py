@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  4 16:59:25 2021
-
-@author: 66441
-"""
 
 # -*- coding: utf-8 -*-
 """
